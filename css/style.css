@@ -1,0 +1,131 @@
+.list{
+	width: 600px;
+	height: 240px;
+	background-color:gainsboro;
+}
+.list .play-list{
+	width: 300px;
+	height: 240px;
+	border: 1px solid #ebebeb;
+	box-sizing: border-box;
+	float: left;
+}
+.list .play-list p{
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 40px;
+	margin: 0px;
+	padding: 0px;
+	text-indent: 12px;
+}
+.list .play-list ul{
+	width: 300px;
+	height: 200px;
+	background-color: cadetblue;
+}
+.list .play-list ul li{
+	line-height: 40px;
+	font-size: 16px;
+	text-indent: 24px;
+}
+
+.list ul{
+	width: 300px;
+	height: 240px;
+	background-color: red;
+	float: right;
+	margin: 0px;
+	padding: 0px;
+}
+.list ul li{
+	list-style: none;
+	width: inherit;
+	height: 40px;
+	line-height: 40px;
+	box-sizing: border-box;
+	padding-left: 24px;
+}
+/*播放器*/
+
+.music{
+				width: 420px;
+				height: 95px;
+				background-color: #999999;
+				position: relative;
+				position: fixed;
+				bottom: 0px;
+				left: 0px;
+			}
+			.music .pic{
+				width: 75px;
+				height: 75px;
+				position: absolute;
+				top: 10px;
+				left: 8px;
+				background-color: #4169E1;
+				border-radius: 50%;
+				overflow: hidden;
+			}
+			.music .pic img{
+				border-radius: 50%;
+				width: 75px;
+				height: 75px;
+				-webkit-animation: auto-play 10s linear infinite;
+				-webkit-animation-play-state: paused;
+			}
+			.music .prev{
+				width: 16px;
+				height: 20px;
+				/*background-color: blue;*/
+				position: absolute;
+				left: 98px;
+				top: 37px;
+				background-image:url(../img/ico_btn_player.png);
+				background-position-x: -64px;
+			}
+			.music .play{
+				width: 24px;
+				height: 26px;
+				/*background-color: blue;*/
+				position: absolute;
+				left: 128px;
+				top: 35px;
+				background-image: url(../img/ico_btn_player.png);
+				background-position: -64px -59px;
+			}
+			.pause{
+				width: 24px;
+				height: 26px;
+				/*background-color: blue;*/
+				position: absolute;
+				left: 128px;
+				top: 35px;
+				background-image: url(../img/ico_btn_player.png);
+				background-position: -64px -89px;
+			}
+			.music .next{
+				width: 16px;
+				height: 20px;
+				/*background-color: blue;*/
+				position: absolute;
+				left: 160px;
+				top: 37px;
+				background-image: url(../img/ico_btn_player.png);
+				background-position: -64px -28px;
+			}
+			.range{
+				float: right;
+				padding-top: 35px;
+			}
+			.range span{
+				float: right;
+			}
+			
+			@-webkit-keyframes auto-play{
+				from{
+					-webkit-transform: rotate(0deg);
+				}
+				to{
+					-webkit-transform: rotate(359deg);
+				}
+			}

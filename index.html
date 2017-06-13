@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body>
+		<div class="list">
+			<div class="play-list">
+				<p>播放列表：</p> 
+				<ul class="load">
+				</ul>
+			</div>
+			<ul class="name">
+				<li draggable="true">《Beautiful In White》</li>
+				<li draggable="true">《童话镇》</li>
+				<li draggable="true">《鱼》</li>
+				<li draggable="true">《处处吻》 </li>
+				<li draggable="true">《虫儿飞》 </li>
+			</ul>
+		</div>
+		
+		<div class="music">
+			<div class="pic">
+				<img src="img/music-pic1.png" id="pic-show" />
+			</div>
+			<div class="prev"></div>
+			<div class="play" id="play"></div>
+			<div class="next"></div>
+			<div class="range">
+				<input type="range" value="1" min="1" max="100" id="range"/>
+				<br />
+				<span id="time">00:00/00:00</span>
+			</div>
+		</div>
+		
+		<audio class="mp3" id="mp3" >
+			<source src="img/Shane Filan - Beautiful In White (Demo).mp3" type="audio/mp3" ></source>
+		</audio>
+		<audio class="mp3">
+			<source src="img/陈一发儿 - 童话镇.mp3" type="audio/mp3"></source>
+		</audio>
+		<audio class="mp3">
+			<source src="img/陈绮贞 - 鱼.mp3" type="audio/mp3"></source>
+		</audio>
+		<audio class="mp3">
+			<source src="img/杨千嬅 - 处处吻.mp3" type="audio/mp3"></source>
+		</audio>
+		<audio draggable="true" class="mp3">
+			<source src="img/屯门儿童合唱团 - 虫儿飞.mp3" type="audio/mp3"></source>
+		</audio>
+		
+		
+		
+		<script type="text/javascript">
+			var aLi = document.getElementsByClassName("name")[0].children; //获取到歌曲名称所在的li
+			var oLoad = document.getElementsByClassName("load")[0]; //target
+			var aMp3= document.getElementsByClassName("mp3"); //获取MP3 列表
+			var oPlay = document.getElementById("play");
+			var oImg = document.getElementById("pic-show");
+			var range = document.getElementById("range");
+			var time = document.getElementById("time");
+			var images = document.getElementById("pic-show");
+			var picshowurl = ["img/music-pic1.png","img/music-pic2.png","img/music-pic3.png","img/music-pic4.png","img/music-pic6.png"];
+			console.log(picshowurl[0])
+			var totalTime = 0;
+			var currentTime =0;
+			
+			var tmp = null ; //定义一个临时变量
+			
+			//遍历所有的歌曲列表li
+			for(var i = 0 ;i<aLi.length;i++){
+				aLi[i].index = i;
+				aLi[i].ondragstart = function(){
+					tmp =this;   //this-->你拖动的那个li
+				console.log(this.index);
+				
+				}
+				
+				aLi.ondragend = function(){
+					tmp = null;                        // 当放手时 ，重新赋空值给临时变量
+				}
+			}
+			//阻止默认操作
+			oLoad.ondragover = function(e){
+				e.preventDefault();
+			}
+			oLoad.ondrop = function(){
+				if(tmp!=null)
+					oLoad.appendChild(tmp);
+				images.setAttribute("src",picshowurl[tmp.index]);
+				var oMp3 = aMp3[tmp.index];
+				
+			//播放器
+			oPlay.onclick =function(){
+				if(oMp3.paused==true){
+				   oMp3.play();
+				   this.setAttribute("class","pause");
+				   oImg.style.webkitAnimationPlayState = "running";
+				}else{
+					oMp3.pause();
+					this.setAttribute("class","play");
+				   oImg.style.webkitAnimationPlayState = "paused";
+					
+				}
+			};
+			//时长
+			setInterval(function(){
+				
+			totalTime = oMp3.duration;//MP3的总时长
+			currentTime = oMp3.currentTime;//播放的当前时间
+			
+			var tm = Math.floor(totalTime /60) ;
+			tm=tm<10 ? "0"+tm : tm ;
+			var ts =Math.floor(totalTime%60) ;
+			ts= ts<10 ? "0"+ts :ts;
+			var cm =Math.floor(currentTime/60);
+			cm= cm<10 ? "0"+cm :cm;
+			var cs = Math.floor(currentTime%60) ;
+			cs= cs<10 ? "0"+cs :cs ;
+			
+			time.innerHTML = cm+":"+cs+"/"+tm+":"+ts ;
+			range.value = currentTime /totalTime *100 ;
+			
+			},1000);
+			}
+			
+			
+			
+			
+		</script>
+	</body>
+</html>
